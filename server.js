@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://user:userpassword@ds121349.mlab.com:21349/users');
 
-//new user Schema
 const userSchema = new Schema({
   name: String,
   username: { type: String, required: true, unique: true },
