@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://user:userpassword@ds121349.mlab.com:21349/users');
 
@@ -20,10 +21,8 @@ userSchema.methods.manify = function(next) {
 userSchema.pre('save', function(next) {
   const currentDate = new Date();
   this.updated_at = currentDate;
-
   if (!this.created_at)
     this.created_at = currentDate;
-
   next();
 });
 
@@ -85,7 +84,6 @@ const updadeUserPassword = function() {
       console.log('New password is ' + user.password);
       return user.save(function(err) {
         if (err) throw err;
-
         console.log('Uzytkownik ' + user.name + ' zostal pomyslnie zaktualizowany');
       })
     })
@@ -94,7 +92,6 @@ const updadeUserPassword = function() {
 const updateUsername = function() {
   return User.findOneAndUpdate({ username: 'Benny_the_boy' }, { username: 'Benny_the_man' }, { new: true }, function(err, user) {
     if (err) throw err;
-
     console.log('Nazwa uzytkownika po aktualizacji to ' + user.username);
   })
 };
@@ -109,7 +106,6 @@ const findMarkAndDelete = function() {
 };
 
 const findKennyAndDelete = function() {
-  // find specific user and delete
   return User.findOne({ username: 'Kenny_the_boy' })
     .then(function(user) {
       return user.remove(function() {
