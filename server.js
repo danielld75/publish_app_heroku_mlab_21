@@ -132,3 +132,13 @@ Promise.all([kenny.save(), mark.save(), benny.save()])
   .then(findKennyAndDelete)
   .then(findBennyAndRemove)
   .catch(console.log.bind(console));
+
+setTimeout(
+  function() {
+    mongoose.disconnect(function(err) {
+      if (err) throw err;
+      console.log('disconnected');
+    });
+  },
+  1000
+);
