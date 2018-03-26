@@ -75,7 +75,7 @@ const findSpecificRecord = function() {
   })
 };
 
-const updadeUserPassword = function() {
+const updateUserPassword = function() {
   return User.findOne({ username: 'Kenny_the_boy' })
     .then(function(user) {
       console.log('Old password is ' + user.password);
@@ -126,19 +126,10 @@ const findBennyAndRemove = function() {
 Promise.all([kenny.save(), mark.save(), benny.save()])
   .then(findAllUsers)
   .then(findSpecificRecord)
-  .then(updadeUserPassword)
+  .then(updateUserPassword)
   .then(updateUsername)
   .then(findMarkAndDelete)
   .then(findKennyAndDelete)
   .then(findBennyAndRemove)
+  .then(() => process.exit())
   .catch(console.log.bind(console));
-
-setTimeout(
-  function() {
-    mongoose.disconnect(function(err) {
-      if (err) throw err;
-      console.log('disconnected');
-    });
-  },
-  1000
-);

@@ -1,2 +1,3 @@
 /.idea
 /publish_app_heroku_mongo.iml
+/node_modules
